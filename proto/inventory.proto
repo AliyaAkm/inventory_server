@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package inventory;
+
+option go_package = "inventory-service/proto/inventorypb";
+
+service InventoryService {
+  // Category methods
+  rpc CreateCategory(CreateCategoryRequest) returns (CategoryResponse);
+  rpc GetCategoryByID(GetCategoryRequest) returns (CategoryResponse);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (CategoryResponse);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteResponse);
+  rpc ListCategories(ListCategoriesRequest) returns (CategoryListResponse);
+
+  // Product methods
+  rpc CreateProduct(CreateProductRequest) returns (ProductResponse);
+  rpc GetProductByID(GetProductRequest) returns (ProductResponse);
+  rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse);
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteResponse);
+  rpc ListProducts(ListProductsRequest) returns (ProductListResponse);
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+}
+
+message UpdateCategoryRequest {
+  uint32 id = 1;
+  string name = 2;
+}
+
+message GetCategoryRequest {
+  uint32 id = 1;
+}
+
+message DeleteCategoryRequest {
+  uint32 id = 1;
+}
+
+message CategoryResponse {
+  uint32 id = 1;
+  string name = 2;
+}
+
+message CategoryListResponse {
+  repeated CategoryResponse categories = 1;
+}
+
+message ListCategoriesRequest {
+  string name = 1;
+  uint32 limit = 2;
+  uint32 offset = 3;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  double price = 2;
+  uint32 stock = 3;
+  uint32 category_id = 4;
+}
+
+message UpdateProductRequest {
+  uint32 id = 1;
+  string name = 2;
+  double price = 3;
+  uint32 stock = 4;
+  uint32 category_id = 5;
+}
+
+message GetProductRequest {
+  uint32 id = 1;
+}
+
+message DeleteProductRequest {
+  uint32 id = 1;
+}
+
+message ProductResponse {
+  uint32 id = 1;
+  string name = 2;
+  double price = 3;
+  int32 stock = 4;
+  uint32 category_id = 5;
+}
+
+message ProductListResponse {
+  repeated ProductResponse products = 1;
+}
+
+message ListProductsRequest {
+  string name = 1;
+  uint32 category_id = 2;
+  uint32 limit = 3;
+  uint32 offset = 4;
+}
+
+message DeleteResponse {
+  string message = 1;
+}

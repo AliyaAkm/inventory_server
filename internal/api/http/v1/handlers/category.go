@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"inventory-service/internal/domain"
-	"inventory-service/usecase"
+	"inventory-service/internal/usecase"
 	"net/http"
 	"strconv"
 
@@ -71,7 +71,6 @@ func (h *CategoryHandler) Update(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Категория успешно обновлена"})
 }
 
-
 func (h *CategoryHandler) Delete(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -87,7 +86,6 @@ func (h *CategoryHandler) Delete(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Категория успешно удалена"})
 }
-
 
 func (h *CategoryHandler) List(c *gin.Context) {
 	name := c.Query("name")
